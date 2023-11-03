@@ -11,11 +11,15 @@ var tfidf = require('../utils/simple-tf-idf-test');
 // });
 
 router.post('/', function(req, res, next) {
-    const { docs, title } = req.body
-    let test = tfidf.similarity_test([title, ...docs])
-
-    console.log(test)
-    res.json(test);
+    try {
+        const { docs, title } = req.body
+        let test = tfidf.similarity_test([title, ...docs])
+        console.log(test)
+        res.json(test);   
+    } catch (error) {
+        console.error(error);
+        res.json(error);
+    }
 });
 
 module.exports = router;
